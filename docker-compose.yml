@@ -1,23 +1,10 @@
 services:
-  qcc74x-sdk:
+  qcc74x-toolchain:
     build:
       context: .
-      dockerfile: Dockerfile.qcc74x
+      dockerfile: Dockerfile
     image: cubicattache/qcc74x-toolchain:latest
     volumes:
       - .:/workspace:rw
-      - ./build:/workspace/build:rw
-      - ~/qcc74x-cache:/cache:rw
     working_dir: /workspace
-    environment:
-      - CHIP=qcc743
-      - BOARD=qcc743dk
-    stdin_open: true
-    tty: true
     platform: linux/amd64
-
-  shell:
-    extends:
-      service: qcc74x-sdk
-    profiles: ["shell"]
-    command: ["/bin/bash"]
